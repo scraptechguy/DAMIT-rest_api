@@ -6,9 +6,6 @@ class AsteroidBase(BaseModel):
     diameter: float
     discovery_date: date
 
-class AsteroidCreate(AsteroidBase):
-    pass
-
 class AsteroidRead(AsteroidBase):
     id: int
 
