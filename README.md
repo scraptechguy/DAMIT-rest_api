@@ -16,7 +16,7 @@
 </div>
 
 ## Project structure
-```
+```python
 DAMIT-rest_api/
 │
 ├── app/
@@ -34,3 +34,24 @@ DAMIT-rest_api/
 ├── run.py                   # Runs uvicorn
 └── requirements.txt         # Dependencies
 ```
+
+## Instructions to run
+
+> Note: Make sure your database (MariaDB) is running and the credentials in app/config.py are correct.
+
+#### Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+#### Start the FastAPI development server from the run.py script
+```bash
+python3 run.py
+```
+
+#### In a separate terminal, expose the local server to the internet with ngrok (requires ngrok to be installed)
+```bash
+ngrok http 8000
+```
+
+> -> Visit the public URL printed by ngrok to access your API
