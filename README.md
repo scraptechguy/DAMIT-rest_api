@@ -31,6 +31,10 @@ DAMIT-rest_api/
 ├── tests/
 │   └── test_main.py         # Simulate HTTP requests
 │
+├── data/shapes/      
+│   ├── 47f96eff1d..         
+│   └── d1b14688e2..         # Sample files (.obj)
+│
 ├── run.py                   # Runs uvicorn
 └── requirements.txt         # Dependencies
 ```
