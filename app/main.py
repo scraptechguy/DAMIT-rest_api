@@ -1,6 +1,7 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
+from fastapi.responses import PlainTextResponse
 from sqlalchemy.orm import Session
-from app import models, schemas, crud
+from app import models, config
 from app.db import SessionLocal, engine
 
 app = FastAPI()
@@ -13,10 +14,26 @@ def get_db():
     finally:
         db.close()
 
-@app.get("/asteroids/", response_model=list[schemas.AsteroidRead])
-def read_asteroids(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    return crud.get_asteroids(db, skip=skip, limit=limit)
-
 @app.get("/")
 def read_root():
     return {"message": "FastAPI DAMIT API is running!"}
+
+@app.get("/shape/{file_id}", response_class=PlainTextResponse)
+def get_shape_file(file_id: int, db: Session = Depends(get_db)):
+    file_record = db.query(models.Asteroid).filter(models.Asteroid.id == file_id).first()
+
+    if not file_record:
+        raise HTTPException(status_code=404, detail="File ID not found in database")
+
+    shape_hash = file_record.hash
+    file_path = config.SHAPE_PATH / shape_hash  # e.g., data/shapes/<hash>
+
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="File not found on disk")
+
+    try:
+        content = file_path.read_text(encoding="utf-8")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error reading file: {str(e)}")
+
+    return content
