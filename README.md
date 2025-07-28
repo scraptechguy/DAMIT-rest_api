@@ -35,8 +35,9 @@ DAMIT-rest_api/
 │   ├── 47f96eff1d..         
 │   └── d1b14688e2..         # Sample files (.obj)
 │
+├── requirements.txt         # Dependencies
 ├── run.py                   # Runs uvicorn
-└── requirements.txt         # Dependencies
+└── start_damit_rest_api.sh  # Runs the REST API
 ```
 
 ## Instructions to run
@@ -48,14 +49,8 @@ DAMIT-rest_api/
 pip install -r requirements.txt
 ```
 
-#### Start the FastAPI development server from the run.py script
+#### Start the FastAPI development server from the run.py script and expose the local server to the internet with ngrok (requires ngrok to be installed)
 ```bash
-python3 run.py
+./start_damit_rest_api.sh
 ```
-
-#### In a separate terminal, expose the local server to the internet with ngrok (requires ngrok to be installed)
-```bash
-ngrok http 8000
-```
-
-> -> Visit the public URL printed by ngrok to access your API
+> -> Visit the public URL printed by the script to access your API
