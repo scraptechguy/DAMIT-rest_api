@@ -36,6 +36,7 @@ DAMIT-rest_api/
 │   └── d1b14688e2..         # Sample files (.obj)
 │
 ├── requirements.txt         # Dependencies
+├── ngrok_url.txt            # Static url to reference dynamic ngrok url
 ├── run.py                   # Runs uvicorn
 └── start_damit_rest_api.sh  # Runs the REST API
 ```
